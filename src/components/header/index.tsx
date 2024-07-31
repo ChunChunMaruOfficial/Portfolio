@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import style from './header.module.scss'
+import style from './style.module.scss'
 
 
 export default function Header() {
@@ -10,7 +10,7 @@ export default function Header() {
             <div>
                 <p>_adam-sherkaui</p>
                 <div>
-                    {pages.map((v, i) => (<button onClick={() => { setactivepage(i) }} className={i === activepage ? style.active : ''}>{v}</button>))}
+                    {pages.map((v, i) => (<button key={i} onClick={() => { setactivepage(i) }} className={i === activepage ? style.active : ''}>{v}</button>))}
                 </div>
             </div>
             <button>_contact-me</button>

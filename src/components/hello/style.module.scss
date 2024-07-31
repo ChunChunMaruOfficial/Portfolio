@@ -1,0 +1,50 @@
+@import '../../mixin.scss';
+
+.parent {
+    @include flex(start, start, column, nowrap);
+    margin-block: auto;
+    gap: 85px;
+
+    >div {
+        &:nth-of-type(1) {
+            >p {
+                &:nth-of-type(1) {
+                    @include font(rgb(229, 233, 240), Fira Code, 18px, 300, 24px);
+                }
+
+                &:nth-of-type(2) {
+                    @include font(rgb(229, 233, 240), Fira Code, 62px, 450, 81px);
+                }
+
+                &:nth-of-type(3) {
+                    @include font(rgb(77, 91, 206), Fira Code, 32px, 300, 42px);
+                }
+            }
+        }
+
+        &:nth-of-type(2) {
+            gap: 10px;
+            >p {
+                @include font(rgb(96, 123, 150), Fira Code, 16px, 450, 21px);
+
+                &:nth-of-type(3) {
+                    @include font(rgb(77, 91, 206), Fira Code, 16px, 500, 21px);
+
+                    >span {
+                        &:nth-of-type(1) {
+                            color: rgb(67, 217, 173);
+                        }
+
+                        &:nth-of-type(2) {
+                            color: rgb(255, 255, 255);
+                        }
+                    }
+
+                    >a {
+                        color: rgb(233, 146, 135);
+                    }
+                }
+            }
+        }
+    }
+}
