@@ -1,0 +1,39 @@
+@import '../../mixin.scss';
+
+.parent,
+.parent>div,
+.parent>a>div {
+    @include flex(center, space-between, row, nowrap);
+}
+
+.parent {
+    width: 100%;
+
+    p,
+    a {
+        @include font(rgb(96, 123, 150), Fira Code, 16px, 450, 21px);
+    }
+
+
+    >div {
+
+
+        >p {
+            padding-inline: 22px;
+        }
+
+        >a>img {
+            height: 100%;
+            border-inline: 1px solid rgb(30, 45, 61);
+
+        }
+    }
+
+    >a>div {
+        border-left: 1px solid rgb(30, 45, 61);
+
+        >p {
+            padding-left: 22px;
+        }
+    }
+}

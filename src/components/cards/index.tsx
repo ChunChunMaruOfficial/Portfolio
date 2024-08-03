@@ -39,12 +39,14 @@ export default function Cards() {
     }, [rate])
     return (
         <div className={style.parent}>
+            <span className={style.blur}></span>
+            <span className={style.blur}></span>
             <div>
                 {wordarray.length === 24 && wordarray.map((v: string, i: number) => {
 
                     return (<div className={style.flip_container} key={i}>
 
-                        <div className={contains(i) ? (style.flipper + ' ' + style.flipped) : (style.flipper + ' ' + style.unflipped)}>
+                        <div className={link === './about' && contains(i) ? (style.flipper + ' ' + style.flipped) : (style.flipper + ' ' + style.unflipped)}>
                             <div onClick={() => (
                                 setmessage('and-another-one'),
                                 setactiveword(v),

@@ -1,0 +1,109 @@
+@import '../../mixin.scss';
+
+.parent {
+    @include flex(start, start, row, nowrap);
+    height: 100%;
+    width: 100%;
+
+    >aside {
+        @include flex(center, start, column, nowrap);
+        height: 100%;
+        border-right: 1px solid rgb(30, 45, 61);
+
+        >img {
+            padding: 20px 26px;
+
+        }
+    }
+
+    >div {
+        @include flex(start, start, column, nowrap);
+        height: 100%;
+        border-right: 1px solid rgb(30, 45, 61);
+        width: 259px;
+
+        >span {
+            @include flex(center, start, row, nowrap);
+            padding: 18px 15px;
+            gap: 11px;
+            border-bottom: 1px solid rgb(30, 45, 61);
+            width: -webkit-fill-available; //я хз че ета
+
+            &:last-of-type {
+                border-top: 1px solid rgb(30, 45, 61);
+            }
+
+            >img {
+                transition: .3s ease-in-out;
+                transform: rotate(-90deg);
+            }
+
+            .rotated {
+                transform: rotate(0deg);
+            }
+
+            >p {
+                @include font(rgb(255, 255, 255), Fira Code, 16px, 300, 21px);
+            }
+
+            &:hover {
+                cursor: pointer
+            }
+
+        }
+
+        >div {
+            @include flex(start, start, column, nowrap);
+            // padding: 22px 17px;
+            height: 0;
+            overflow: hidden;
+
+            >*:not(span:last-of-type) {
+                margin-bottom: 16px
+            }
+
+            &.opened {
+                height: max-content;
+                padding: 22px 17px;
+            }
+
+            >span {
+                @include flex(center, start, row, nowrap);
+                gap: 9px;
+
+                a,
+                >p {
+                    @include font(rgb(96, 123, 150), Fira Code, 16px, 300, 21px);
+                }
+
+                >img:first-of-type {
+                    transition: .3s ease-in-out;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                .rotated {
+                    transform: rotate(90deg)
+                }
+            }
+
+            >div {
+                height: 0;
+                transition: .6s ease-in-out;
+                overflow: hidden;
+
+                &:not(.opened) {
+                    margin-bottom: 0;
+                }
+
+                &.opened {
+                    height: max-content;
+                }
+
+            }
+
+        }
+    }
+}

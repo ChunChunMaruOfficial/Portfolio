@@ -10,10 +10,10 @@
     -webkit-backdrop-filter: blur(64px);
     background: linear-gradient(153.43deg, rgba(23, 85, 83, 0.7) 1.705%, rgba(67, 217, 173, 0.09) 81.819%);
     gap: 24px;
-
+    position: relative;
     padding: 30px;
 
-    >span {
+    >span:not(.blur) {
         position: relative;
 
         >img:nth-of-type(2) {
@@ -21,6 +21,27 @@
             top: 50%;
             left: 50%;
             transform: translate(-85%, -140%);
+        }
+    }
+
+    .blur {
+        z-index: -1;
+        position: absolute;
+        width: 454px;
+        height: 492px;
+        filter: blur(174px);
+        opacity: 0.4;
+
+        &:first-of-type {
+            top: -126px;
+            left: -50px;
+            background: rgb(67, 217, 173);
+        }
+
+        &:nth-of-type(2) {
+            top: 30px;
+            left: 173px;
+            background: rgb(77, 91, 206);
         }
     }
 
@@ -83,14 +104,14 @@
                 z-index: 2;
                 transform: rotateY(0deg);
                 background: rgba(1, 22, 39, 0.84);
-                color: rgba(138, 238, 208,.01)
+                color: rgba(138, 238, 208, .01)
             }
 
 
             .back {
                 transform: rotateY(180deg);
                 background: linear-gradient(rgba(77, 91, 206, .5) 1.705%, rgba(67, 217, 173, .5) 81.819%);
-             
+
             }
         }
 
