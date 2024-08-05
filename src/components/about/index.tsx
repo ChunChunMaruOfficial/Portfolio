@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react'
 import style from './style.module.scss'
 
-import reactlang from '../../assets/svg/tools/react.svg'
-import htmllang from '../../assets/svg/tools/html5.svg'
-import vue from '../../assets/svg/tools/vue.svg'
-import css from '../../assets/svg/tools/css3.svg'
-import angular from '../../assets/svg/tools/angular.svg'
+import Programming from './folders/skils/programming'
+import Gamingandanime from './folders/skils/gamingandanime'
 
 import terminal from '../../assets/svg/icons/terminal.svg'
 import magic from '../../assets/svg/icons/magic.svg'
@@ -27,11 +24,12 @@ export default function About() {
     const [openedlists, setopenedlists] = useState<number[]>([])
     const [infoisopen, setinfoisopen] = useState<boolean>(false)
     const [contactsisopen, setcontactsisopen] = useState<boolean>(false)
+    const [selectedpage, setselectedpage] = useState<number>(0)
 
     const asidearray = [terminal, magic, controller]
 
     const infoarray = [
-        { title: 'skils', img: redfolder },
+        { title: 'skils', img: redfolder, content: ['programming', 'games', 'anime'] },
         { title: 'interests', img: greenfolder },
         { title: 'education', img: bluefolder }]
 
@@ -43,31 +41,16 @@ export default function About() {
         img: phone,
         title: '+375 (29) 113-23-25'
     }]
-
-
-    const programming = () => {
-        return (
-            <>
-                <ul>
-                    <li><img src={htmllang} alt="" /> HTML5</li>
-                    <li><img src={css} alt="" /> CSS3</li>
-                    <li><img src={reactlang} alt="" /> React</li>
-                </ul>
-                <p>in process</p>
-                <ul>
-                    <li><img src={vue} alt="" /> Vue</li>
-                    <li><img src={angular} alt="" /> Angular</li>
-                </ul>
-            </>
-        )
-    }
-
-    const contentarray = [
-        {
-            items: ['programming', 'games', 'anime'],
-            contents: [programming(), ]
+    const componentrender = () => {
+        switch (selectedpage) {
+            case 1:
+                return <Programming />
+            case 2:
+                return <Gamingandanime bool={true} />
+            case 3:
+                return <Gamingandanime bool={false} />
         }
-    ]
+    }
     return (
         <div className={style.parent}>
             <aside>
@@ -83,8 +66,7 @@ export default function About() {
                             <p>{v.title}</p>
                         </span>
                         <div className={openedlists.includes(i) ? style.opened : ''}>
-                            {}
-                            <p>lorem lorem</p>
+                            {v.content?.map((v, i) => (<span><img src={listitem}/><p onClick={() => setselectedpage(i+1)}>{v}</p></span>))}
                         </div></>))}
                 </div>
                 <span onClick={() => setcontactsisopen(!contactsisopen)}><img src={whitearrow} alt=">>" className={contactsisopen ? style.rotated : ''} /><p>contacts</p></span>
@@ -92,6 +74,9 @@ export default function About() {
                     {contactsarray.map((v, i) => (<span><img src={v.img} alt="" /><a href={i === 0 ? 'mailto:c4erkaoui@gmail.com' : 'tel:+375291132325'}>{v.title}</a></span>))}
                 </div>
             </div>
+            {componentrender()}
+
+
         </div>
     )
 }

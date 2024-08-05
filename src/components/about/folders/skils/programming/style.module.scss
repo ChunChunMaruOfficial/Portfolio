@@ -1,0 +1,26 @@
+@import '../../../../../mixin.scss';
+
+.parent {
+    @include flex(start, start, row, nowrap);
+    padding: 18px 38px;
+    gap: 40px;
+
+    >p {
+        @include font(rgb(96, 123, 150), Fira Code, 18px, 450, 240%);
+        width: min-content;
+        text-wrap: wrapж
+    }
+
+    >div {
+        @include flex(start, start, column, nowrap);
+
+        gap: 18px;
+
+        >p {
+            @include flex(center, center, row, nowrap);
+            gap: 8px;
+            @include font(rgb(255, 255, 255), Fira Code, 18px, 450, 150%);
+
+        }
+    }
+}
