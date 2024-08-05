@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import style from './style.module.scss'
 
 import Programming from './folders/skils/programming'
@@ -19,19 +19,21 @@ import email from '../../assets/svg/contacts/email.svg'
 import phone from '../../assets/svg/contacts/phone.svg'
 
 import listitem from '../../assets/svg/listitem.svg'
+import notfound from '../../assets/svg/system/error.svg'
 
 export default function About() {
     const [openedlists, setopenedlists] = useState<number[]>([])
     const [infoisopen, setinfoisopen] = useState<boolean>(false)
     const [contactsisopen, setcontactsisopen] = useState<boolean>(false)
+    const [selectedpages, setselectedpages] = useState<string[]>([])
     const [selectedpage, setselectedpage] = useState<number>(0)
 
     const asidearray = [terminal, magic, controller]
 
     const infoarray = [
         { title: 'skils', img: redfolder, content: ['programming', 'games', 'anime'] },
-        { title: 'interests', img: greenfolder },
-        { title: 'education', img: bluefolder }]
+        { title: 'interests', img: greenfolder, content: ['not found'] },
+        { title: 'education', img: bluefolder, content: ['not found'] }]
 
     const contactsarray = [{
         img: email,
@@ -66,7 +68,7 @@ export default function About() {
                             <p>{v.title}</p>
                         </span>
                         <div className={openedlists.includes(i) ? style.opened : ''}>
-                            {v.content?.map((v, i) => (<span><img src={listitem}/><p onClick={() => setselectedpage(i+1)}>{v}</p></span>))}
+                            {v.content?.map((v2, i2) => (<span onClick={() => (selectedpages.includes(v2) ? "" : setselectedpages(selectedpages => [...selectedpages, v2]), setselectedpage(i2+1))}><img src={v2 === 'not found' ? notfound : listitem} alt='' /><p>{v2}</p></span>))}
                         </div></>))}
                 </div>
                 <span onClick={() => setcontactsisopen(!contactsisopen)}><img src={whitearrow} alt=">>" className={contactsisopen ? style.rotated : ''} /><p>contacts</p></span>
@@ -74,7 +76,13 @@ export default function About() {
                     {contactsarray.map((v, i) => (<span><img src={v.img} alt="" /><a href={i === 0 ? 'mailto:c4erkaoui@gmail.com' : 'tel:+375291132325'}>{v.title}</a></span>))}
                 </div>
             </div>
-            {componentrender()}
+            <div>
+                <div>
+                    {selectedpages.map((v, i) => (<span onClick={() => setselectedpage(i)}><p>{v}</p><img src={notfound} alt="X" onClick={() => setselectedpages(openedlists => openedlists.filter(x => x != v))} /></span>))}
+                 </div>
+                {componentrender()}
+            </div>
+
 
 
         </div>
