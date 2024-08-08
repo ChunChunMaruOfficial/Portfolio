@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import style from './style.module.scss'
 
+import pfp from '../../assets/img/pfp.png'
+
 import Programming from './folders/skils/programming'
 import Gamingandanime from './folders/skils/gamingandanime'
 
@@ -45,6 +47,7 @@ export default function About() {
     }]
     const componentrender = () => {
         switch (selectedpage) {
+            case 0:
             case 1:
                 return <Programming />
             case 2:
@@ -68,7 +71,7 @@ export default function About() {
                             <p>{v.title}</p>
                         </span>
                         <div className={openedlists.includes(i) ? style.opened : ''}>
-                            {v.content?.map((v2, i2) => (<span onClick={() => (selectedpages.includes(v2) ? "" : setselectedpages(selectedpages => [...selectedpages, v2]), setselectedpage(i2+1))}><img src={v2 === 'not found' ? notfound : listitem} alt='' /><p>{v2}</p></span>))}
+                            {v.content?.map((v2, i2) => (<span onClick={() => (selectedpages.includes(v2) ? "" : setselectedpages(selectedpages => [...selectedpages, v2]), setselectedpage(i2 + 1))}><img src={v2 === 'not found' ? notfound : listitem} alt='' /><p>{v2}</p></span>))}
                         </div></>))}
                 </div>
                 <span onClick={() => setcontactsisopen(!contactsisopen)}><img src={whitearrow} alt=">>" className={contactsisopen ? style.rotated : ''} /><p>contacts</p></span>
@@ -78,11 +81,28 @@ export default function About() {
             </div>
             <div>
                 <div>
-                    {selectedpages.map((v, i) => (<span onClick={() => setselectedpage(i)}><p>{v}</p><img src={notfound} alt="X" onClick={() => setselectedpages(openedlists => openedlists.filter(x => x != v))} /></span>))}
-                 </div>
+                    {selectedpages.map((v, i) => (<span onClick={() => infoarray[0].content.map((v2, i2) => v2 === v ? setselectedpage(infoarray[0].content.indexOf(v, i2) + 1) : '')}><p>{v}</p><img src={notfound} alt="X" onClick={() => (setselectedpages(openedlists => openedlists.filter(x => x != v)), setselectedpage(0))} /></span>))}
+                </div>
                 {componentrender()}
             </div>
+            <div>
+                <p>// Code snippet showcase:</p>
+                <div>
+                    <div>
+                        <span>
+                            <img src={pfp} alt="" />
+                            <span>
+                                <a href="#">@ChunChunMaruOfficial</a>
+                                <p>Created 5 months ago</p>
+                            </span>
+                        </span>
+                    </div>
+                    <div>
 
+                    </div>
+                </div>
+
+            </div>
 
 
         </div>

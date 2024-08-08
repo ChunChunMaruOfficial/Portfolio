@@ -7,7 +7,7 @@
     width: 100%;
 
     >p {
-        @include font(rgb(96, 123, 150), Fira Code, 18px, 450, 180%);
+        @include font(rgb(96, 123, 150), Fira Code, 16px, 450, 180%);
 
         &:first-of-type {
             text-wrap: wrap;
@@ -15,7 +15,7 @@
         }
 
         &:nth-of-type(2) {
-            width: 50%;
+            width: 80%;
         }
     }
 }
