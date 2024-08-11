@@ -23,12 +23,36 @@ import phone from '../../assets/svg/contacts/phone.svg'
 import listitem from '../../assets/svg/listitem.svg'
 import notfound from '../../assets/svg/system/error.svg'
 
+import details from '../../assets/svg/codesnippet/details.svg'
+import star from '../../assets/svg/codesnippet/star.svg'
+
+
 export default function About() {
     const [openedlists, setopenedlists] = useState<number[]>([])
     const [infoisopen, setinfoisopen] = useState<boolean>(false)
     const [contactsisopen, setcontactsisopen] = useState<boolean>(false)
     const [selectedpages, setselectedpages] = useState<string[]>([])
     const [selectedpage, setselectedpage] = useState<number>(0)
+
+    const codearray = [{
+        text: `function initializeModelChunk<T>(chunk: ResolvedModelChunk): T { 
+  const value: T = parseModel(chunk._response, chunk._value);
+  const initializedChunk: InitializedChunk<T> = (chunk: any);
+  initializedChunk._status = INITIALIZED;
+  initializedChunk._value = value;
+  return value; 
+}`,
+        stars: 3,
+        months: 5
+    }, {
+        text: `export function parseModelTuple(
+  response: Response,
+  value: {+[key: string]: JSONValue} | $ReadOnlyArray<JSONValue>,
+): any {
+  const tuple: [mixed, mixed, mixed, mixed] = (value: any);`,
+        stars: 0,
+        months: 9
+    }]
 
     const asidearray = [terminal, magic, controller]
 
@@ -45,6 +69,16 @@ export default function About() {
         img: phone,
         title: '+375 (29) 113-23-25'
     }]
+
+    const codesnippet = [{
+        img: details,
+        title: 'details'
+    },
+    {
+        img: star,
+        title: 'star'
+    }]
+
     const componentrender = () => {
         switch (selectedpage) {
             case 0:
@@ -85,26 +119,28 @@ export default function About() {
                 </div>
                 {componentrender()}
             </div>
+            <span></span>
             <div>
                 <p>// Code snippet showcase:</p>
-                <div>
+                {codearray.map((v, i) => (
                     <div>
-                        <span>
-                            <img src={pfp} alt="" />
+                        <div>
                             <span>
-                                <a href="#">@ChunChunMaruOfficial</a>
-                                <p>Created 5 months ago</p>
+                                <img src={pfp} alt="" />
+                                <span>
+                                    <a href="#">@ChunChunMaruOfficial</a>
+                                    <p>Created {v.months} months ago</p>
+                                </span>
                             </span>
-                        </span>
-                    </div>
-                    <div>
-
-                    </div>
-                </div>
-
+                            <span>
+                                {codesnippet.map((v1, i1) => (<span><img src={v1.img} alt="" /><p>{v.stars} {v1.title}s</p></span>))}
+                            </span>
+                        </div>
+                        <div>
+                            {v.text}
+                        </div>
+                    </div>))}
             </div>
-
-
         </div>
     )
 }

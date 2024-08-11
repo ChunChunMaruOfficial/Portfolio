@@ -4,7 +4,12 @@
     @include flex(start, start, row, nowrap);
     height: 100%;
     width: 100%;
-
+    >span{
+        background: rgb(96, 123, 150);
+        margin: 5px 4px;
+        width: 18px;
+        height: 7px;
+    }
     >aside {
         @include flex(center, start, column, nowrap);
         height: 100%;
@@ -144,36 +149,74 @@
 
         &:nth-of-type(3) {
             padding: 17px 40px;
-
+            border-left: 1px solid rgb(30, 45, 61);
+            border-top: 1px solid rgb(30, 45, 61);
             >p {
                 @include font(rgb(96, 123, 150), Fira Code, 18px, 450, 24px);
+                margin-bottom: 60px;
             }
 
             >div {
                 @include flex(start, start, column, nowrap);
                 gap: 12px;
+                width: min-content;
+
+                &:nth-of-type(1) {
+                    margin-bottom: 30px;
+                }
 
                 >div {
-                    @include flex(center, space-between, row, nowrap);
-
-                    >span {
-                        @include flex(center, start, row, nowrap);
-
-                        >img {
-                            height: 36px;
-                        }
+                    &:nth-of-type(1) {
+                        @include flex(center, space-between, row, nowrap);
+                        gap: 284px;
 
                         >span {
-                            @include flex(start, start, column, nowrap);
+                            @include flex(center, start, row, nowrap);
 
-                            >a {
-                                @include font(rgb(85, 101, 232), Fira Code, 14px, 700, 18px);
+                            &:nth-of-type(1) {
+                                gap: 10px;
+
+                                >img {
+                                    height: 36px;
+                                }
+
+                                >span {
+                                    @include flex(start, start, column, nowrap);
+                                    gap: 2px;
+
+                                    >a {
+                                        @include font(rgb(85, 101, 232), Fira Code, 14px, 700, 18px);
+                                    }
+
+                                    >p {
+                                        @include font(rgb(96, 123, 150), Fira Code, 12px, 450, 16px);
+                                    }
+                                }
                             }
 
-                            >p {
-                                @include font(rgb(96, 123, 150), Fira Code, 12px, 450, 16px);
+                            &:nth-of-type(2) {
+                                gap: 18px;
+
+                                >span {
+                                    @include flex(center, start, row, nowrap);
+                                    gap: 7px;
+
+                                    >p {
+                                        @include font(rgb(96, 123, 150), Fira Code, 14px, 450, 18px);
+                                        width: max-content;
+                                    }
+                                }
                             }
                         }
+                    }
+
+                    &:nth-of-type(2) {
+                        border: 1px solid rgb(30, 45, 61);
+                        border-radius: 15px;
+                        background: rgb(1, 18, 33);
+                        padding: 24px 30px;
+
+                        @include font(rgb(96, 123, 150), Fira Code, 18px, 450, 170%);
                     }
                 }
             }
