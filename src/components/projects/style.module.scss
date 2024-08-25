@@ -45,5 +45,57 @@
                 }
             }
         }
+
+        &:nth-of-type(2) {
+            @include flex(center, center, row, wrap);
+            width: 100%;
+            gap: 40px;
+
+            >div {
+                width: 370px;
+
+                >p {
+                    @include font(rgb(96, 123, 150), Fira Code, 16px, 450, 21px);
+                    margin-bottom: 15px;
+                    >span {
+                        @include font(rgb(85, 101, 232), Fira Code, 16px, 700, 21px);
+                    }
+
+                    
+                }
+
+                >div {
+                    height: 315px;
+                    overflow: hidden;
+                    border: 1px solid rgb(30, 45, 61);
+                    border-radius: 15px;
+                    background: rgb(1, 18, 33);
+
+                    >img {
+                        height: 40%;
+                        object-fit: cover;
+                        width: 100%;
+                        border-bottom: 1px solid rgb(30, 45, 61);
+                    }
+
+                    >p,
+                    >a>button {
+                        margin-left: 31px;
+                    }
+
+                    >p {
+                        @include font(rgb(96, 123, 150), Fira Code, 18px, 450, 150%);
+                        margin-block: 22px;
+                    }
+
+                    >a>button {
+                        border-radius: 8px;
+                        background: rgb(28, 43, 58);
+                        @include font(rgb(255, 255, 255), Fira Code, 14px, 450, 18px);
+                        padding: 10px 14px;
+                    }
+                }
+            }
+        }
     }
 }

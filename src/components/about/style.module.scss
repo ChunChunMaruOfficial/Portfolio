@@ -4,12 +4,14 @@
     @include flex(start, start, row, nowrap);
     height: 100%;
     width: 100%;
-    >span{
+
+    >span {
         background: rgb(96, 123, 150);
         margin: 5px 4px;
         width: 18px;
         height: 7px;
     }
+
     >aside {
         @include flex(center, start, column, nowrap);
         height: 100%;
@@ -87,6 +89,10 @@
                         @include font(rgb(96, 123, 150), Fira Code, 16px, 300, 21px);
                     }
 
+                    >.white {
+                        color: rgb(255, 255, 255);
+                    }
+
                     >img:first-of-type {
                         transition: .3s ease-in-out;
                     }
@@ -148,17 +154,17 @@
         }
 
         &:nth-of-type(3) {
-            padding: 17px 40px;
+            padding-inline: 40px;
             border-left: 1px solid rgb(30, 45, 61);
             border-top: 1px solid rgb(30, 45, 61);
+
             >p {
                 @include font(rgb(96, 123, 150), Fira Code, 18px, 450, 24px);
-                margin-bottom: 60px;
+                margin-block: 17px 60px;
             }
 
             >div {
                 @include flex(start, start, column, nowrap);
-                gap: 12px;
                 width: min-content;
 
                 &:nth-of-type(1) {
@@ -167,6 +173,7 @@
 
                 >div {
                     &:nth-of-type(1) {
+                        margin-bottom: 12px;
                         @include flex(center, space-between, row, nowrap);
                         gap: 284px;
 
@@ -215,8 +222,25 @@
                         border-radius: 15px;
                         background: rgb(1, 18, 33);
                         padding: 24px 30px;
+                        margin-bottom: 19px;
 
                         @include font(rgb(96, 123, 150), Fira Code, 18px, 450, 170%);
+                    }
+
+                    &:nth-of-type(3) {
+                        @include flex(start, space-between, row, nowrap);
+                        border-top: 1px solid rgb(30, 45, 61);
+                        padding-top: 17px;
+                        width: 100%;
+
+                        >p {
+                            @include font(rgb(96, 123, 150), Fira Code, 14px, 450, 150%);
+                            margin-right: 0px;
+                        }
+                    }
+
+                    >.opened{
+                        
                     }
                 }
             }

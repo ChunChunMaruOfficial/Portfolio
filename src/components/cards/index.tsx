@@ -7,7 +7,7 @@ export default function Cards() {
     const [activeword, setactiveword] = useState<string>('')
     const [rate, setrate] = useState<number>(0)
     const [wordarray, setwordarray] = useState<any>('ABCDEFGHIJKL')
-    const [numbers, setnumbers] = useState<any[]>([])
+    const [numbers, setnumbers] = useState<number[]>([])
     const [message, setmessage] = useState<string>('select-a-letter')
     const [checkbox, setcheckbox] = useState<boolean>()
     const [timer, settimer] = useState<number>(0)
@@ -19,22 +19,17 @@ export default function Cards() {
     }, [])
 
     useEffect(() => {
+        !link && settimer(0)
         if (rate != 12 && link) {
             const id = setInterval(() => {
                 settimer((c: number) => c + 1);
             }, 10);
-
             return () => clearInterval(id);
         }
     }, [rate, link]);
 
-    const contains = (n: number) => {
-        let x = false
-        numbers.map((v) => v === n ? x = true : '')
-        return x
-    }
     useEffect(() => {
-        rate === 12 && setmessage('victory!1!1')
+        rate === 12 && (setmessage('victory!1!1'), setlink('./about'))
 
     }, [rate])
     return (
@@ -46,15 +41,17 @@ export default function Cards() {
 
                     return (<div className={style.flip_container} key={i}>
 
-                        <div className={link === './about' && contains(i) ? (style.flipper + ' ' + style.flipped) : (style.flipper + ' ' + style.unflipped)}>
-                            <div onClick={() => (
+                        <div className={ numbers.includes(i) ? (style.flipper + ' ' + style.flipped) : (style.flipper + ' ' + style.unflipped)}>
+                            <div onClick={() => timer > 0 && (
                                 setmessage('and-another-one'),
                                 setactiveword(v),
-                                activeword != '' ? ((v === activeword ? (setrate(rate + 1), setnumbers((v) => [...v, i])) : (numbers.splice(-1),
+                                setnumbers((v) => [...v, i]),
+                                activeword != '' ? ((v === activeword ? setrate(rate + 1) : (
                                     setmessage('wrong'),
                                     setTimeout(() => {
+                                        setnumbers(prevnumbers => prevnumbers.slice(0, -2))
                                         setmessage('select-a-letter')
-                                    }, 1000))), setactiveword('')) : setnumbers((v) => [...v, i])
+                                    }, 500))), setactiveword('')) : ''
                             )} className={style.front}>
                                 {checkbox && (<p>{v}</p>)}
                             </div>
@@ -76,11 +73,27 @@ export default function Cards() {
                 <div>
                     ////////
                 </div>
-                <Link to={link}><button onClick={() => setlink('./about')} style={message === 'victory!1!1' || !link ? {
-                    opacity: '100%'
-                } : { opacity: '0' }}>
-                    {rate === 12 ? 'next' : 'start'}
+                <Link to={link}><button onClick={(e) => {
+                    switch ((e.target as HTMLButtonElement).innerText) {
+                        case 'start':
+                            setlink('./')
+                            break;
+                        case 'next':
+
+                            break;
+                        case 'restart':
+                            setlink('')
+                            setnumbers([])
+                            setmessage('select-a-letter')
+                            setrate(0)
+                            break;
+                    }
+                }}>
+                    {timer === 0 ? 'start' : (rate === 12 ? 'next' : 'restart')}
                 </button></Link>
+                <button >
+                    pause
+                </button>
             </div>
             {[...Array(4)].map((v, i) => {
                 let x = '12px'

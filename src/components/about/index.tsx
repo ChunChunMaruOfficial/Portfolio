@@ -33,6 +33,7 @@ export default function About() {
     const [contactsisopen, setcontactsisopen] = useState<boolean>(false)
     const [selectedpages, setselectedpages] = useState<string[]>([])
     const [selectedpage, setselectedpage] = useState<number>(0)
+    const [openeddetails, setopeneddetails] = useState<number[]>([])
 
     const codearray = [{
         text: `function initializeModelChunk<T>(chunk: ResolvedModelChunk): T { 
@@ -102,7 +103,7 @@ export default function About() {
                         <span onClick={() => openedlists.includes(i) ? (setopenedlists(openedlists.filter(obj => obj != i))) : setopenedlists(openedlists => [...openedlists, i])}>
                             <img src={arrow} alt=">" className={openedlists.includes(i) ? style.rotated : ''} />
                             <img src={v.img} alt={i.toString()} />
-                            <p>{v.title}</p>
+                            <p className={openedlists.includes(i) ? style.white : ''}>{v.title}</p>
                         </span>
                         <div className={openedlists.includes(i) ? style.opened : ''}>
                             {v.content?.map((v2, i2) => (<span onClick={() => (selectedpages.includes(v2) ? "" : setselectedpages(selectedpages => [...selectedpages, v2]), setselectedpage(i2 + 1))}><img src={v2 === 'not found' ? notfound : listitem} alt='' /><p>{v2}</p></span>))}
@@ -115,14 +116,14 @@ export default function About() {
             </div>
             <div>
                 <div>
-                    {selectedpages.map((v, i) => (<span onClick={() => infoarray[0].content.map((v2, i2) => v2 === v ? setselectedpage(infoarray[0].content.indexOf(v, i2) + 1) : '')}><p>{v}</p><img src={notfound} alt="X" onClick={() => (setselectedpages(openedlists => openedlists.filter(x => x != v)), setselectedpage(0))} /></span>))}
+                    {selectedpages.map((v) => (<span onClick={() => infoarray[0].content.map((v2, i2) => v2 === v ? setselectedpage(infoarray[0].content.indexOf(v, i2) + 1) : '')}><p>{v}</p><img src={notfound} alt="X" onClick={() => (setselectedpages(openedlists => openedlists.filter(x => x != v)), setselectedpage(0))} /></span>))}
                 </div>
                 {componentrender()}
             </div>
             <span></span>
             <div>
                 <p>// Code snippet showcase:</p>
-                {codearray.map((v, i) => (
+                {codearray.map((v) => (
                     <div>
                         <div>
                             <span>
@@ -133,11 +134,14 @@ export default function About() {
                                 </span>
                             </span>
                             <span>
-                                {codesnippet.map((v1, i1) => (<span><img src={v1.img} alt="" /><p>{v.stars} {v1.title}s</p></span>))}
+                                {codesnippet.map((v1) => (<span><img src={v1.img} alt="" /><p>{v.stars} {v1.title}</p></span>))}
                             </span>
                         </div>
                         <div>
                             {v.text}
+                        </div>
+                        <div>
+                            <p>there should be text about my code here, but the code above is not mine)))</p> <img src={notfound} alt="x" />
                         </div>
                     </div>))}
             </div>
