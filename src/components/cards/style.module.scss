@@ -1,0 +1,339 @@
+@import '../../mixin.scss';
+
+
+.parent {
+    @include flex(start, start, row, nowrap);
+    border: 1px solid rgb(12, 22, 22);
+    border-radius: 8px;
+    box-shadow: inset 0px 2px 0px 0px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(64px);
+    -webkit-backdrop-filter: blur(64px);
+    background: linear-gradient(153.43deg, rgba(23, 85, 83, 0.7) 1.705%, rgba(67, 217, 173, 0.09) 81.819%);
+    gap: 24px;
+    position: relative;
+    padding: 30px;
+
+    >span:not(.blur) {
+        position: relative;
+
+        >img:nth-of-type(2) {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-85%, -140%);
+        }
+    }
+
+    .blur {
+        z-index: -1;
+        position: absolute;
+        width: 454px;
+        height: 492px;
+        filter: blur(174px);
+        opacity: 0.4;
+
+        &:first-of-type {
+            top: -126px;
+            left: -50px;
+            background: rgb(67, 217, 173);
+        }
+
+        &:nth-of-type(2) {
+            top: 30px;
+            left: 173px;
+            background: rgb(77, 91, 206);
+        }
+    }
+
+    >div {
+        height: 415px;
+
+        &:first-of-type {
+            @include flex(center, center, row, wrap);
+            gap: 5px;
+            width: 450px;
+
+
+            .flip_container {
+                perspective: 1000px;
+                width: 70px;
+                height: 100px;
+                @include font(rgb(255, 255, 255), Fira Code, 16px, 450, 21px);
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .flipped {
+                transform: rotateY(180deg);
+            }
+
+            .unflipped {
+                transform: rotateY(0);
+            }
+
+
+
+
+            .flipper {
+                transition: 0.6s;
+                transform-style: preserve-3d;
+                height: 100%;
+                position: relative;
+            }
+
+
+            .front,
+            .back {
+                backface-visibility: hidden;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                border-radius: 12px;
+                left: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                @include font(rgb(138, 238, 208), Fira Code, 48px, 600, 21px);
+
+            }
+
+
+            .front {
+                z-index: 2;
+                transform: rotateY(0deg);
+                background: rgba(1, 22, 39, 0.84);
+                color: rgba(138, 238, 208, .01)
+            }
+
+
+            .back {
+                transform: rotateY(180deg);
+                background: linear-gradient(rgba(77, 91, 206, .5) 1.705%, rgba(67, 217, 173, .5) 81.819%);
+
+            }
+        }
+
+        &:nth-of-type(2) {
+            @include flex(start, start, column, wrap);
+            transition: .3s ease-in-out;
+            gap: 20px;
+
+            >span {
+                @include font(rgb(1, 12, 21), Fira Code, 14px, 450, 18px);
+                @include flex(center, space-between, row, wrap);
+                width: 100%;
+
+                >input {
+                    color: rgb(1, 12, 21);
+                    scale: 1.5;
+                    align-self: flex-end;
+                    margin-right: 15px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+            }
+
+            >p {
+                transition: .3s ease-in-out;
+                @include font(rgb(255, 255, 255), Fira Code, 14px, 450, 18px);
+            }
+
+            >div {
+                @include flex(start, start, column, wrap);
+                padding: 12px;
+                transition: .3s ease-in-out;
+
+                &:nth-of-type(1) {
+                    border-radius: 8px;
+                    background: rgba(1, 20, 35, 0.19);
+                }
+
+                &:nth-of-type(2) {
+                    border-radius: 8px;
+                    box-shadow: inset 1px 5px 11px 0px rgba(2, 18, 27, 0.71);
+                    background: rgba(1, 22, 39, 0.84);
+                    margin-bottom: 50px;
+                    @include flex(start, start, row, wrap);
+                    gap: 6px;
+
+                    @include font(rgb(255, 255, 255), Fira Code, 14px, 450, 18px);
+                }
+            }
+
+            >span {
+                @include flex(center, center, row, nowrap);
+                gap: 16px;
+
+                &:nth-of-type(2) {
+                    >button {
+                        @include font(rgb(255, 255, 255), Fira Code, 14px, 450, 18px);
+                        padding: 10px 14px;
+                        border: 1px solid rgb(30, 45, 61);
+                        border-radius: 8px;
+                        background: rgb(1, 12, 21);
+                    }
+                }
+
+                &:nth-of-type(3) {
+
+                    >button,
+                    >a>button {
+                        @include font(rgb(255, 255, 255), Fira Code, 14px, 450, 18px);
+                        padding: 10px 14px;
+                        box-sizing: border-box;
+                        border: 1px solid rgb(255, 255, 255);
+                        border-radius: 8px;
+                        align-self: flex-end;
+                        background-color: rgba(0, 0, 0, 0);
+                        transition: .3s ease-in-out;
+                    }
+                }
+            }
+        }
+    }
+
+
+}
+
+
+.toggle {
+    --time: 0.25s;
+    --x0: 0%;
+    --x1: 0%;
+    --x2: 0%;
+    --x3: 0%;
+    --x4: 0%;
+    --x5: 0%;
+    --x6: 0%;
+    --x7: 0%;
+    appearance: none;
+    position: relative;
+    font-size: 1em;
+    box-sizing: content-box;
+    height: 1em;
+    width: 2.5em;
+    border: max(1px, 0.05em) solid;
+    border-radius: 10em;
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 2.3em;
+        height: 0.8em;
+        top: 0.1em;
+        left: 0.1em;
+        background:
+            radial-gradient(farthest-side circle at 0.4em 0.4em, rgb(1, 12, 21) 99%, rgba(1, 12, 21, 0)) var(--x0) 0.0em,
+            radial-gradient(farthest-side circle at 0.4em 0.3em, rgb(1, 12, 21) 99%, rgba(1, 12, 21, 0)) var(--x1) 0.1em,
+            radial-gradient(farthest-side circle at 0.4em 0.2em, rgb(1, 12, 21) 99%, rgba(1, 12, 21, 0)) var(--x2) 0.2em,
+            radial-gradient(farthest-side circle at 0.4em 0.1em, rgb(1, 12, 21) 99%, rgba(1, 12, 21, 0)) var(--x3) 0.3em,
+            radial-gradient(farthest-side circle at 0.4em 0.0em, rgb(1, 12, 21)0 99%, rgba(1, 12, 21, 0)) var(--x4) 0.4em,
+            radial-gradient(farthest-side circle at 0.4em -0.1em, rgb(1, 12, 21) 99%, rgba(1, 12, 21, 0)) var(--x5) 0.5em,
+            radial-gradient(farthest-side circle at 0.4em -0.2em, rgb(1, 12, 21) 99%, rgba(1, 12, 21, 0)) var(--x6) 0.6em,
+            radial-gradient(farthest-side circle at 0.4em -0.3em, rgb(1, 12, 21) 99%, rgba(1, 12, 21, 0)) var(--x7) 0.7em;
+        background-repeat: no-repeat;
+        background-size: 0.8em 0.1em;
+        transition:
+            --x0 var(--time) calc(var(--time) * 0.00) ease,
+            --x1 var(--time) calc(var(--time) * 0.05) linear,
+            --x2 var(--time) calc(var(--time) * 0.15) ease-out,
+            --x3 var(--time) calc(var(--time) * 0.10) ease-in,
+            --x4 var(--time) calc(var(--time) * 0.05) cubic-bezier(0.1, 0.7, 1, 0.1),
+            --x5 var(--time) calc(var(--time) * 0.20) steps(10, end),
+            --x6 var(--time) calc(var(--time) * 0.15) cubic-bezier(0.1, 0.4, 1, 1.1),
+            --x7 var(--time) calc(var(--time) * 0.10) steps(7, start);
+    }
+
+    &:checked {
+        --x0: 100%;
+        --x1: 100%;
+        --x2: 100%;
+        --x3: 100%;
+        --x4: 100%;
+        --x5: 100%;
+        --x6: 100%;
+        --x7: 100%;
+    }
+
+    &[disabled] {
+        opacity: 0.25;
+    }
+}
+
+@media print {
+    .toggle {
+
+        &,
+        &::before,
+        &::after {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+    }
+}
+
+@media (prefers-reduced-motion) {
+    .toggle {
+
+        &,
+        &::before,
+        &::after {
+            transition: none !important;
+            animation: none !important;
+        }
+    }
+}
+
+@property --x0 {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: true;
+}
+
+@property --x1 {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: true;
+}
+
+@property --x2 {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: true;
+}
+
+@property --x3 {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: true;
+}
+
+@property --x4 {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: true;
+}
+
+@property --x5 {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: true;
+}
+
+@property --x6 {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: true;
+}
+
+@property --x7 {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: true;
+}

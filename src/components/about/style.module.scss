@@ -1,0 +1,249 @@
+@import '../../mixin.scss';
+
+.parent {
+    @include flex(start, start, row, nowrap);
+    height: 100%;
+    width: 100%;
+
+    >span {
+        background: rgb(96, 123, 150);
+        margin: 5px 4px;
+        width: 18px;
+        height: 7px;
+    }
+
+    >aside {
+        @include flex(center, start, column, nowrap);
+        height: 100%;
+        border-right: 1px solid rgb(30, 45, 61);
+
+        >img {
+            padding: 20px 26px;
+
+        }
+    }
+
+    >div {
+        @include flex(start, start, column, nowrap);
+        height: 100%;
+        border-right: 1px solid rgb(30, 45, 61);
+
+        &:first-of-type {
+            width: 331px;
+
+            >span {
+                @include flex(center, start, row, nowrap);
+                padding: 18px 15px;
+                gap: 11px;
+                border-bottom: 1px solid rgb(30, 45, 61);
+                width: -webkit-fill-available; //я хз че ета
+
+                &:last-of-type {
+                    border-top: 1px solid rgb(30, 45, 61);
+                }
+
+                >img {
+                    transition: .3s ease-in-out;
+                    transform: rotate(-90deg);
+                }
+
+                .rotated {
+                    transform: rotate(0deg);
+                }
+
+                >p {
+                    @include font(rgb(255, 255, 255), Fira Code, 16px, 300, 21px);
+                }
+
+                &:hover {
+                    cursor: pointer
+                }
+
+            }
+
+            >div,
+            >div>div {
+                @include flex(start, start, column, nowrap);
+                height: 0;
+                overflow: hidden;
+            }
+
+            >div {
+
+                >* {
+                    margin-bottom: 16px
+                }
+
+                &.opened {
+                    height: max-content;
+                    padding: 22px 17px 6px 17px;
+                }
+
+                >div>span,
+                >span {
+                    @include flex(center, start, row, nowrap);
+                    gap: 9px;
+
+                    a,
+                    >p {
+                        @include font(rgb(96, 123, 150), Fira Code, 16px, 300, 21px);
+                    }
+
+                    >.white {
+                        color: rgb(255, 255, 255);
+                    }
+
+                    >img:first-of-type {
+                        transition: .3s ease-in-out;
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                    .rotated {
+                        transform: rotate(90deg)
+                    }
+                }
+
+                >div {
+                    transition: .6s ease-in-out;
+                    gap: 8px;
+                    margin-left: 16px;
+
+                    &:not(.opened) {
+                        margin-bottom: 0;
+                    }
+
+                    &.opened {
+                        height: max-content;
+                    }
+
+
+                }
+
+            }
+        }
+
+        &:nth-of-type(2) {
+            width: 40%;
+
+            >div {
+                &:first-of-type {
+                    width: 100%;
+                    @include flex(center, start, row, nowrap);
+                    border-bottom: 1px solid rgb(30, 45, 61);
+
+                    >span {
+                        padding: 16.5px 15px;
+                        @include flex(center, start, row, nowrap);
+                        gap: 50px;
+                        border-right: 1px solid rgb(30, 45, 61);
+
+                        >p {
+                            @include font(rgb(96, 123, 150), Fira Code, 16px, 300, 21px);
+                        }
+
+                        >img:hover,
+                        >p:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+
+        &:nth-of-type(3) {
+            padding-inline: 40px;
+            border-left: 1px solid rgb(30, 45, 61);
+            border-top: 1px solid rgb(30, 45, 61);
+
+            >p {
+                @include font(rgb(96, 123, 150), Fira Code, 18px, 450, 24px);
+                margin-block: 17px 60px;
+            }
+
+            >div {
+                @include flex(start, start, column, nowrap);
+                width: min-content;
+
+                &:nth-of-type(1) {
+                    margin-bottom: 30px;
+                }
+
+                >div {
+                    &:nth-of-type(1) {
+                        margin-bottom: 12px;
+                        @include flex(center, space-between, row, nowrap);
+                        gap: 284px;
+
+                        >span {
+                            @include flex(center, start, row, nowrap);
+
+                            &:nth-of-type(1) {
+                                gap: 10px;
+
+                                >img {
+                                    height: 36px;
+                                }
+
+                                >span {
+                                    @include flex(start, start, column, nowrap);
+                                    gap: 2px;
+
+                                    >a {
+                                        @include font(rgb(85, 101, 232), Fira Code, 14px, 700, 18px);
+                                    }
+
+                                    >p {
+                                        @include font(rgb(96, 123, 150), Fira Code, 12px, 450, 16px);
+                                    }
+                                }
+                            }
+
+                            &:nth-of-type(2) {
+                                gap: 18px;
+
+                                >span {
+                                    @include flex(center, start, row, nowrap);
+                                    gap: 7px;
+
+                                    >p {
+                                        @include font(rgb(96, 123, 150), Fira Code, 14px, 450, 18px);
+                                        width: max-content;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &:nth-of-type(2) {
+                        border: 1px solid rgb(30, 45, 61);
+                        border-radius: 15px;
+                        background: rgb(1, 18, 33);
+                        padding: 24px 30px;
+                        margin-bottom: 19px;
+
+                        @include font(rgb(96, 123, 150), Fira Code, 18px, 450, 170%);
+                    }
+
+                    &:nth-of-type(3) {
+                        @include flex(start, space-between, row, nowrap);
+                        border-top: 1px solid rgb(30, 45, 61);
+                        padding-top: 17px;
+                        width: 100%;
+
+                        >p {
+                            @include font(rgb(96, 123, 150), Fira Code, 14px, 450, 150%);
+                            margin-right: 0px;
+                        }
+                    }
+
+                    >.opened{
+                        
+                    }
+                }
+            }
+        }
+    }
+}

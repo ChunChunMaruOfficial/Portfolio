@@ -1,0 +1,8 @@
+@import '../../mixin.scss';
+
+.parent {
+    @include flex(center, center, row, nowrap);
+    height: 100%;
+    width: 100%;
+    gap: 155px;
+}
