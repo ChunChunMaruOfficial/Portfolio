@@ -7,7 +7,7 @@ export default function PageHello() {
     return (
         <div className={style.parent}>
             <Hello />
-            <YapaneseTrainer/>
+            <Cards/>
         </div>
     )
 }

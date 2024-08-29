@@ -5,14 +5,21 @@ import style from './style.module.scss'
 
 
 export default function YapaneseTrainer() {
-    const [answer, setanswer] = useState<number>()
-    const random = (x: number) => {
+    const [ex, setex] = useState<number>(1)
+
+function Render() {
+    return(
+      <div className={style.wrapper}>  <p>{random(10)} {random(4)} {random(9)}</p> <input title='3eE' type="text" /> </div>
+    )
+}
+
+    function random(x: number) {
         switch (x) {
-            case 10:
+            case 10 :
                 return Math.floor(Math.random() * x)
-            case 9:
+            case 9 :
                 return (Math.floor(Math.random() * x) + 1)
-            case 4:
+            case 4 :
                 switch (Math.floor(Math.random() * x)) {
                     case 0: return '+'
                     case 1: return '-'
@@ -22,17 +29,11 @@ export default function YapaneseTrainer() {
         }
     }
 
-    const array = [{
-        first: random(10),
-        sign: random(4),
-        second: random(9),
-    }]
 
-    console.log(array.map((v) => eval()));
-    
     return (
         <div className={style.parent}>
-            {array.map((v) => (<><p onChange={e => setanswer(e.target.innerHTML)}>{v.first} {v.sign} {v.second}</p><input /></>))}
+          {[...Array(ex)].map(() => Render())}
+          <button onClick={() => setex(x => x + 1)}>rwr</button>
         </div>
     )
 }
