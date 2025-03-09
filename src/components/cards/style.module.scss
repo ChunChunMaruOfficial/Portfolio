@@ -1,5 +1,29 @@
 @import '../../mixin.scss';
 
+.bigger {
+    animation: bigger forwards 0.1s ease-in-out;
+}
+
+@keyframes bigger {
+    from {
+        height: 417px;
+    }
+    to {
+        height: 625px;
+    }
+}
+.smaller {
+    animation: smaller forwards 0.1s ease-in-out;
+}
+
+@keyframes smaller {
+    from {
+        height: 625px;
+    }
+    to {
+        height: 625417pxpx;
+    }
+}
 
 .parent {
     @include flex(start, start, row, nowrap);
@@ -12,6 +36,7 @@
     gap: 24px;
     position: relative;
     padding: 30px;
+    height: 417px;
 
     >span:not(.blur) {
         position: relative;
@@ -45,6 +70,9 @@
         }
     }
 
+
+
+
     >div {
         height: 415px;
 
@@ -53,11 +81,18 @@
             gap: 5px;
             width: 450px;
 
+            .normalsize{
+                width: 70px;
+                height: 100px;
+            }
+            .bigsize{
+                width: 91px;
+                height: 130px;
+            }
 
             .flip_container {
                 perspective: 1000px;
-                width: 70px;
-                height: 100px;
+              
                 @include font(rgb(255, 255, 255), Fira Code, 16px, 450, 21px);
 
                 &:hover {
@@ -158,10 +193,10 @@
                     border-radius: 8px;
                     box-shadow: inset 1px 5px 11px 0px rgba(2, 18, 27, 0.71);
                     background: rgba(1, 22, 39, 0.84);
-                    margin-bottom: 50px;
+                    margin-bottom: 20px;
                     @include flex(start, start, row, wrap);
                     gap: 6px;
-
+                    max-width: 138px;
                     @include font(rgb(255, 255, 255), Fira Code, 14px, 450, 18px);
                 }
             }

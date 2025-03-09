@@ -14,6 +14,7 @@ export default function Index() {
             <Routes>
                 <Route path="*" element={<h1>404</h1>} />
                 <Route path="/" element={<PageHello />} />
+                <Route path="/Portfolio" element={<PageHello />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/projects" element={<Projects />} />
             </Routes>

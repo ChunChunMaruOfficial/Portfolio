@@ -14,22 +14,33 @@ export default function Cards() {
     const [timer, settimer] = useState<number>(0)
     const [link, setlink] = useState<string>('')
     const [pause, setpause] = useState<boolean>(false)
+    const [complexity, setcomplexity] = useState<number>(1)
     const [attempts, setattempts] = useState<number>(0)
 
-    const complexityarray = [{ text: 'easy', array: 'ABCDEFG' },
+    const complexityarray = [{ text: 'easy', array: 'ABCDEF' },
     { text: 'medium', array: 'ABCDEFGHIJKL' },
     { text: 'hard', array: 'ABCDEFGHIJKLMNOPQR' }]
 
-    console.log(letters, wordarray)
-    
+    /* запрет на копирование текста */
+
+    document.ondragstart = noselect;
+    document.onselectstart = noselect;
+    document.oncontextmenu = noselect;
+    function noselect() { return false; }
+
+    /* =========================== */
 
     useEffect(() => {
-        setwordarray(letters.concat(letters).sort(() => Math.random() - 0.5))
-    }, [letters])
+        if (rate == 0) {
+
+            setletters(complexityarray[complexity].array.split(''))
+            setwordarray(complexityarray[complexity].array.split('').concat(complexityarray[complexity].array.split('')).sort(() => Math.random() - 0.5))
+        }
+    }, [complexity, rate])
 
     useEffect(() => {
         !link && settimer(0)
-        if (!pause && rate < 12 && link) {
+        if (!pause && rate < letters.length && link) {
             const id = setInterval(() => {
                 settimer((c: number) => c + 1);
             }, 10);
@@ -37,30 +48,30 @@ export default function Cards() {
         }
     }, [rate, link, pause]);
 
-    useEffect(() => {
-        rate === 12 && (setmessage('victory!1!1'), setlink('./about'))
-
-    }, [rate])
+    useEffect(() => {        
+        rate == letters.length && (setmessage('victory!1!1'), setlink('./about'), setpause(true))
+    }, [rate,letters])
     return (
-        <div className={style.parent}>
+        <div className={style.parent + ' ' + (complexity == 2 ? style.bigger : complexity == 0 ? style.smaller : '')}>
             <span className={style.blur}></span>
             <span className={style.blur}></span>
             <div>
-                {wordarray.length >= 14 && wordarray.map((v: string, i: number) => {
+                {wordarray.length >= 12 && wordarray.map((v: string, i: number) => {
 
-                    return (<div className={style.flip_container} key={i}>
+                    return (<div className={style.flip_container + ' ' + (complexity == 0 ? style.bigsize : style.normalsize)} key={i}>
 
                         <div className={numbers.includes(i) ? (style.flipper + ' ' + style.flipped) : (style.flipper + ' ' + style.unflipped)}>
                             <div onClick={() => timer > 0 && (
                                 setmessage('and-another-one'),
                                 setactiveword(v),
                                 setnumbers((v) => [...v, i]),
-                                activeword != '' ? ((v === activeword ? (setrate(rate + 1), setmessage('select-a-letter'), setletters(l => l.map(v1 => v1 === v ? v1 = v1.toLowerCase() : v1))) : (
+                                activeword != '' ? ((v === activeword ? (setrate(rate + 1), setactiveword(''), setmessage('select-a-letter'), setletters(l => l.map(v1 => v1 === v ? v1 = '✔' : v1))) : (
                                     setmessage('wrong'),
                                     setTimeout(() => {
                                         setnumbers(prevnumbers => prevnumbers.slice(0, -2))
                                         setmessage('select-a-letter')
-                                    }, 500))), setactiveword(''), setattempts(at => at + 1)) : ''
+                                        setactiveword('')
+                                    }, 500))), setattempts(at => at + 1)) : ''
                             )} className={style.front}>
                                 {checkbox && (<p>{v}</p>)}
                             </div>
@@ -83,12 +94,16 @@ export default function Cards() {
                 <div>
                     {letters.map((v) => (<p>{v}</p>))}
                 </div>
-                <span>{complexityarray.map((v) => (<button onClick={(() => setletters(v.array.split('')))}>{v.text}</button>))}</span>
+                <span>
+
+                    {timer === 0 && (<button onClick={() => { complexity == 2 ? setcomplexity(0) : setcomplexity(complexity + 1) }}>{complexityarray[complexity].text}</button>)}
+                </span>
                 <span>
                     <button onClick={(e) => {
                         (e.target as HTMLButtonElement).innerText === 'start' ? setlink('./') : (
+                            setpause(false),
                             setlink(''),
-                            setletters('ABCDEFGHIJKL'.split('')), //можно доработать потом
+                            setletters(complexityarray[complexity].array.split('')), //можно доработать потом
                             setnumbers([]),
                             setmessage('select-a-letter'),
                             setrate(0),
@@ -97,8 +112,8 @@ export default function Cards() {
                     }}>
                         {timer === 0 ? 'start' : 'restart'}
                     </button>
-                    <Link to={link}>  <button onClick={() => setpause(link != './about' && pause ? false : true)} style={{ opacity: link ? '100%' : '0' }}>
-                        {rate === 12 ? 'next' : (pause ? 'resume' : 'pause')}
+                    <Link style={{ display: link ? 'block' : 'none' }} to={link}>  <button onClick={() => setpause(link != './about' && pause ? false : true)} >
+                        {rate === letters.length ? 'next' : (pause ? 'resume' : 'pause')}
                     </button></Link>
                 </span>
             </div>
@@ -111,10 +126,10 @@ export default function Cards() {
                             x = '484px'
                             break;
                         case 2:
-                            y = '449px'
+                            y = complexity == 2 ? '652px' : '449px'
                             break;
                         case 3:
-                            y = '449px'
+                            y = complexity == 2 ? '652px' : '449px'
                             x = '484px'
                             break;
                     } return (<span
